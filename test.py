@@ -97,22 +97,18 @@ def analyze_file(filename, sheet_name='Sheet1'):
         'inner_case3': {'total': 0, 'on_time': 0},
         'outer_case': {'total': 0, 'on_time': 0},
     }
+    stats_center_city = {}
 
     for row in ws.iter_rows(min_row=2, values_only=True):
-        # bỏ qua dòng trống
         if all(v is None for v in row):
             continue
 
         created_at, approved_at, packed_at, completed_at, city, center = row[:6]
 
-        # thiếu data bước nào là bỏ
         if (
-            created_at is None
-            or approved_at is None
-            or packed_at is None
-            or completed_at is None
-            or city is None
-            or center is None
+            created_at is None or approved_at is None or
+            packed_at is None or completed_at is None or
+            city is None or center is None
         ):
             continue
 
@@ -121,15 +117,26 @@ def analyze_file(filename, sheet_name='Sheet1'):
             continue
 
         if inner_flag:
+            # lọc 3 TH nội thành
             case_code = classify_inner_case(created_at)
             stats[case_code]['total'] += 1
-            if check_inner_case_sla(case_code, created_at, approved_at, packed_at, completed_at):
+            on_time = check_inner_case_sla(case_code, created_at, approved_at, packed_at, completed_at)
+            if on_time:
                 stats[case_code]['on_time'] += 1
         else:
             case_code = 'outer_case'
             stats[case_code]['total'] += 1
-            if check_outer_sla(created_at, approved_at, packed_at, completed_at):
+            on_time = check_outer_sla(created_at, approved_at, packed_at, completed_at)
+            if on_time:
                 stats[case_code]['on_time'] += 1
+
+        # Thống kê theo (center, city)
+        key = (center, city)
+        if key not in stats_center_city:
+            stats_center_city[key] = {'total': 0, 'on_time': 0}
+        stats_center_city[key]['total'] += 1
+        if on_time:
+            stats_center_city[key]['on_time'] += 1
 
     case_names = {
         'inner_case1': 'Nội thành - Đặt trước 10h',
@@ -138,16 +145,22 @@ def analyze_file(filename, sheet_name='Sheet1'):
         'outer_case': 'Ngoại thành',
     }
 
-    # chỉ in tổng đơn và trễ như bạn yêu cầu
     for code, info in stats.items():
         total = info['total']
-        late = total - info['on_time']
+        # late = total - info['on_time']
+        late = info['on_time']
         print(f"=== {case_names[code]} ===")
         print(f"  Tổng đơn : {total}")
         print(f"  Trễ SLA  : {late}")
         print()
 
-    return stats
+    print("=== THỐNG KÊ THEO CENTER & CITY ===")
+    for (center, city), info in stats_center_city.items():
+        total = info['total']
+        late = total - info['on_time']
+        print(f"Center {center} - {city}: Tổng {total} đơn, Trễ SLA {late} đơn")
+
+    return stats, stats_center_city
 
 
 if __name__ == "__main__":
