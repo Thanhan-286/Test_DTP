@@ -146,11 +146,6 @@ Rủi ro ở Ngoại thành: Mặc dù số đơn ngoại thành cao nhất (cho
 #### Chart 2 – SLA theo Center
 ![SLA theo Center](./img/img2.png)
 **Bar chart (on-time vs late)**  
-- So sánh Hà Nội – HCM – Đà Nẵng
-
-**Insight**  
-Không phải center có nhiều đơn nhất là center trễ nhiều nhất;  
-chất lượng vận hành giữa các center khác nhau rõ rệt.
 
 ---
 
