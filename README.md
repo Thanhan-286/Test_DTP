@@ -86,25 +86,31 @@ Sau khi xử lý, hệ thống sinh ra các thống kê:
 Mỗi case có: 
 
 === Nội thành - Đặt trước 10h ===
+
   Tổng đơn : 9
-  Trễ SLA  : 0
+  Trễ SLA  : 9
 
 === Nội thành - Đặt 10h-16h ===
+
   Tổng đơn : 5
-  Trễ SLA  : 0
+  Trễ SLA  : 5
 
 === Nội thành - Đặt sau 16h ===
+
   Tổng đơn : 2
-  Trễ SLA  : 0
+  Trễ SLA  : 2
 
 === Ngoại thành ===
+
   Tổng đơn : 13
-  Trễ SLA  : 1
+  Trễ SLA  : 12
 
 ---
 
 ### 3.2. Theo Center & City
 Thống kê cho từng cặp `(Center, City)`:
+
+=== THỐNG KÊ THEO CENTER & CITY ===
 
 - Center 4 - Thành phố Hà Nội: Tổng 7 đơn, Trễ SLA 7 đơn
 - Center 4 - Tỉnh Tuyên Quang: Tổng 2 đơn, Trễ SLA 2 đơn
@@ -114,7 +120,6 @@ Thống kê cho từng cặp `(Center, City)`:
 - Center 3 - Tỉnh Quảng Trị: Tổng 1 đơn, Trễ SLA 1 đơn
 - Center 2 - Thành phố Cần Thơ: Tổng 3 đơn, Trễ SLA 3 đơn
 - Center 2 - Tỉnh Khánh Hòa: Tổng 3 đơn, Trễ SLA 3 đơn
-- Center 2 - Thành phố Hồ Chí Minh: Tổng 4 đơn, Trễ SLA 4 đơn
 
 ---
 
@@ -132,24 +137,24 @@ Thống kê cho từng cặp `(Center, City)`:
 ### Chart được vẽ
 
 #### Chart 1 – SLA theo case
-![Bar chart (on-time vs late)](./img/img.png)
+![Bar chart (on-time vs late)](./img/output1.png)
 **Bar chart (on-time vs late)**  
 - So sánh 3 khung nội thành và ngoại thành
 - Dùng để xác định **case rủi ro SLA cao nhất**
 
 
 **Insight**  
-Rủi ro ở Ngoại thành: Mặc dù số đơn ngoại thành cao nhất (cho thấy nhu cầu lớn), nhưng việc xuất hiện đơn trễ (dù chỉ 1 đơn) cho thấy khâu vận chuyển đi xa hoặc logistics ngoại thành đang gặp chút vấn đề hoặc rủi ro cao hơn so với nội thành
+Rủi ro ở Ngoại thành: Mặc dù số đơn ngoại thành cao nhất (cho thấy nhu cầu lớn), nhưng việc xuất hiện đơn on_time (dù chỉ 1 đơn) cho thấy khâu vận chuyển đi xa hoặc logistics ngoại thành đang gặp ít vấn đề hoặc rủi ro hơn so với nội thành
 
 ---
 
 #### Chart 2 – SLA theo Center
-![SLA theo Center](./img/img2.png)
+![SLA theo Center](./img/output2.png)
 **Bar chart (on-time vs late)**  
 
 ---
 
 #### Chart 3 – Top City trễ SLA
-![Top City trễ SLA](./img/img3.png)
+![Top City trễ SLA](./img/output3.png)
 
 ---

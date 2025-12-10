@@ -147,8 +147,8 @@ def analyze_file(filename, sheet_name='Sheet1'):
 
     for code, info in stats.items():
         total = info['total']
-        # late = total - info['on_time']
-        late = info['on_time']
+        late = total - info['on_time']
+        # late = info['on_time']
         print(f"=== {case_names[code]} ===")
         print(f"  Tổng đơn : {total}")
         print(f"  Trễ SLA  : {late}")
